@@ -70,24 +70,30 @@ r1ap = 1;
 r2ap = 2*r1ap.*sin(ap/2);
 Ap = r1ap.*r2ap.*cos(ap/2);
 
-S1r = a.*r2/2;
-S2r = 2*(pi-a).*r1/2;
+S1r = a.*r2.^2/2;
+S2r = (pi-a).*r1.^2;
+
+S1 = S1r+S2r-A/2;
+S2 = a.*r1.^2-a.*r2.^2/2+A/2;
 
 plot(
     a, r2, 'r-', 
     a, A, 'g-',
     a, S1r, 'k-',
     a, S2r, '-',
+    a, S1, 'b.',
+    a, S2, 'y.',
+    a, S1+S2, 'b-',
     ap, Ap, '*k'
 );
 
 % Set x-ticks at multiples of pi
 xarr = -pi:pi/2:pi;
-xarr = [xarr, [ap, -ap, pi/4, 3*pi/4]];
+xarr = [xarr, [ap, -ap, pi/4, 3*pi/4, ap-pi/2+pi/4]];
 xticks(xarr);
 
 % Label the x-ticks using pi notation
-xticklabels({'-\pi', '-\pi/2', '0', '\pi/2', '\pi', num2str(ap), num2str(-ap), '\pi/4', '3\pi/4'});
+xticklabels({'-\pi', '-\pi/2', '0', '\pi/2', '\pi', num2str(ap), num2str(-ap), '\pi/4', '3\pi/4', 'aa**'});
 grid;
 
 
